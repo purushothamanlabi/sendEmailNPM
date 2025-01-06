@@ -1,0 +1,42 @@
+{
+  "name": "mail-sender-util",
+  "version": "1.0.0",
+  "description": "A robust email sending utility using nodemailer with enhanced error handling and validation",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src/",
+    "format": "prettier --write \"src/**/*.js\"",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "email",
+    "nodemailer",
+    "smtp",
+    "mail-sender",
+    "email-utility",
+    "mail-service"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.9.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "husky": "^8.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/mail-sender-util.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/mail-sender-util/issues"
+  },
+  "homepage": "https://github.com/yourusername/mail-sender-util#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 
