@@ -3,9 +3,10 @@
  * Sums three numbers together
  * 
  * #!/bin/sh
- * 
-#!/bin/sh
 
+
+ls -l .git/hooks
+lkjj
 # Run the Python script after the commit
 python3 /home/finstein-emp/Music/TestingAutomation/gitstatus.py
 if [ $? -ne 0 ]; then
