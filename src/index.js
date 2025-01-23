@@ -7,6 +7,7 @@
  */
 function sum3Numbers(a, b, c) {
     return a + b + c;
+    // return a + b + c;
 }
 
 module.exports = { sum3Numbers };
