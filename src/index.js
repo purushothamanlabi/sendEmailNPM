@@ -10,4 +10,5 @@ function sum3Numbers(a, b, c) {
     // return a + b + c;
 }
 
+somthing = 1;
 module.exports = { sum3Numbers };
