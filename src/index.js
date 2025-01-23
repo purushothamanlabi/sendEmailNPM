@@ -3,12 +3,7 @@
  * Sums three numbers together
  * 
  * #!/bin/sh
- hello world
-
-
-
-
-
+ hello worl
  # Add the following line to the .git/hooks/post-commit file
 
 # Add the following line to the .git/hooks/post-commit file
