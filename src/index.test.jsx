@@ -2,40 +2,55 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import index from './index';
 
-### Unit Test Cases:
-#### Test Case 1: Valid Input (Positive Numbers)
-- **Arrange:** Define the input `a`, `b`, and `c` with positive values.
-- **Act:** Call the `sum3Numbers()` function with the defined input.
-- **Assert:** Verify that the function returns the correct sum of the input numbers.
+**Unit Tests:**
 
-#### Test Case 2: Valid Input (Negative Numbers)
-- **Arrange:** Define the input `a`, `b`, and `c` with negative values.
-- **Act:** Call the `sum3Numbers()` function with the defined input.
-- **Assert:** Verify that the function returns the correct sum of the input numbers.
+**1. Valid Test Cases:**
 
-#### Test Case 3: Valid Input (Floating Point Numbers)
-- **Arrange:** Define the input `a`, `b`, and `c` with floating-point values.
-- **Act:** Call the `sum3Numbers()` function with the defined input.
-- **Assert:** Verify that the function returns the correct sum of the input numbers.
+| Input | Output | Description |
+|---|---|---|
+| sum3Numbers(1, 2, 3) | 6 | Sums three positive numbers |
+| sum3Numbers(0, 0, 0) | 0 | Sums three zero |
+| sum3Numbers(-1, -2, -3) | -6 | Sums three negative numbers |
 
-#### Test Case 4: Invalid Input (Non-Numeric Characters)
-- **Arrange:** Define the input `a`, `b`, and `c` with non-numeric characters.
-- **Act:** Call the `sum3Numbers()` function with the defined input.
-- **Assert:** Verify that the function throws an appropriate error message.
+**2. Edge Case Test Cases:**
 
-#### Test Case 5: Boundary Values
-- **Arrange:** Define the input `a`, `b`, and `c` with minimum and maximum possible values.
-- **Act:** Call the `sum3Numbers()` function with the defined input.
-- **Assert:** Verify that the function returns the correct sum of the input numbers.
+| Input | Output | Description |
+|---|---|---|
+| sum3Numbers(1, undefined, 3) | NaN | Sums a number and an undefined value |
+| sum3Numbers(Infinity, 2, 3) | Infinity | Sums a number and Infinity |
+| sum3Numbers(NaN, 2, 3) | NaN | Sums a number and NaN |
 
-### Integration Test Cases:
-#### Test Case 6: Consumption by Other Modules
-- **Arrange:** Create a separate module that imports the `sum3Numbers()` function.
-- **Act:** Use the `sum3Numbers()` function within the imported module.
-- **Assert:** Verify that the consumed module performs the intended functionality correctly.
+**3. Invalid Test Cases:**
 
-### Regression Test Cases:
-#### Test Case 7: Refactoring (Changing Implementation)
-- **Arrange:** Make a change to the `sum3Numbers()` function while maintaining its input and output specifications.
-- **Act:** Re-run the previously passed test cases.
-- **Assert:** Verify that the function still performs as expected with the updated implementation.
+| Input | Description |
+|---|---|
+| sum3Numbers("1", 2, 3) | Attempts to sum a string and numbers |
+| sum3Numbers(1, "2", 3) | Attempts to sum a number and a string |
+| sum3Numbers(1, 2, "3") | Attempts to sum a number and a string |
+
+**React Test:**
+
+**1. Component Test:**
+
+js
+import App from './App';
+
+test('renders learn react link', () => {
+  const { getByText } = render(<App />);
+  const linkElement = getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+
+
+**2. Functional Test:**
+
+js
+import App from './App';
+
+test('button click increments counter', () => {
+  const { getByText } = render(<App />);
+  const button = getByText(/increment/i);
+  fireEvent.click(button);
+  const counter = getByText(/Count: 1/i);
+  expect(counter).toBeInTheDocument();
+});
