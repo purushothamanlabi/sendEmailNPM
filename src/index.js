@@ -1,4 +1,5 @@
 /**
+ * Sums three numbers
  * Sums three numbers together
  * @param {number} a - First number
  * @param {number} b - Second number
