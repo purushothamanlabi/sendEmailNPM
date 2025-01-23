@@ -1,6 +1,8 @@
 /**
  * Sums three numbers
  * Sums three numbers together
+ * 
+ * @module
  * @param {number} a - First number
  * @param {number} b - Second number
  * @param {number} c - Third number
