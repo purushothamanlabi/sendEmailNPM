@@ -1,0 +1,55 @@
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import index.test from './index.test';
+
+**Test Case Structure:**
+
+js
+describe('index', () => {
+  it('should render the app title', () => {
+    render(<index />);
+    expect(screen.getByText('Hello, Jest!')).toBeInTheDocument();
+  });
+
+  it('should display the input fields', () => {
+    render(<index />);
+    const input1 = screen.getByLabelText('Number 1:');
+    const input2 = screen.getByLabelText('Number 2:');
+    const input3 = screen.getByLabelText('Number 3:');
+    expect(input1).toBeInTheDocument();
+    expect(input2).toBeInTheDocument();
+    expect(input3).toBeInTheDocument();
+  });
+
+  it('should calculate and display the sum when the button is clicked', () => {
+    render(<index />);
+    const input1 = screen.getByLabelText('Number 1:');
+    const input2 = screen.getByLabelText('Number 2:');
+    const input3 = screen.getByLabelText('Number 3:');
+    fireEvent.change(input1, { target: { value: '1' } });
+    fireEvent.change(input2, { target: { value: '2' } });
+    fireEvent.change(input3, { target: { value: '3' } });
+
+    const calculateButton = screen.getByText('Calculate');
+    fireEvent.click(calculateButton);
+
+    const sumDisplay = screen.getByText('Sum: 6');
+    expect(sumDisplay).toBeInTheDocument();
+  });
+
+  it('should handle invalid input', () => {
+    render(<index />);
+    const input1 = screen.getByLabelText('Number 1:');
+    const input2 = screen.getByLabelText('Number 2:');
+    const input3 = screen.getByLabelText('Number 3:');
+    fireEvent.change(input1, { target: { value: 'a' } });
+    fireEvent.change(input2, { target: { value: 'b' } });
+    fireEvent.change(input3, { target: { value: 'c' } });
+
+    const calculateButton = screen.getByText('Calculate');
+    fireEvent.click(calculateButton);
+
+    const errorMessage = screen.getByText('Invalid input. Please enter numbers only.');
+    expect(errorMessage).toBeInTheDocument();
+  });
+});
