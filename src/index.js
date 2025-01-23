@@ -3,6 +3,8 @@
  * Sums three numbers together
  * 
  * #!/bin/sh
+ * 
+#!/bin/sh
 
 # Run the Python script after the commit
 python3 /home/finstein-emp/Music/TestingAutomation/gitstatus.py
