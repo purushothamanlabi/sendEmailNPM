@@ -2,54 +2,149 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import index.test from './index.test';
 
-**Test Case Structure:**
+**Unit Tests:**
 
-js
-describe('index', () => {
-  it('should render the app title', () => {
-    render(<index />);
-    expect(screen.getByText('Hello, Jest!')).toBeInTheDocument();
-  });
+**1. Positive Inputs:**
 
-  it('should display the input fields', () => {
-    render(<index />);
-    const input1 = screen.getByLabelText('Number 1:');
-    const input2 = screen.getByLabelText('Number 2:');
-    const input3 = screen.getByLabelText('Number 3:');
-    expect(input1).toBeInTheDocument();
-    expect(input2).toBeInTheDocument();
-    expect(input3).toBeInTheDocument();
-  });
+- **a. Verify the sum of three positive numbers:**
+  - Test Code:
+    
+    it('should sum three positive numbers', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: '1' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: '2' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: '3' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryByText('6')).toBeInTheDocument();
+    });
+    
 
-  it('should calculate and display the sum when the button is clicked', () => {
-    render(<index />);
-    const input1 = screen.getByLabelText('Number 1:');
-    const input2 = screen.getByLabelText('Number 2:');
-    const input3 = screen.getByLabelText('Number 3:');
-    fireEvent.change(input1, { target: { value: '1' } });
-    fireEvent.change(input2, { target: { value: '2' } });
-    fireEvent.change(input3, { target: { value: '3' } });
+- **b. Verify the sum of a zero and two positive numbers:**
+  - Test Code:
+    
+    it('should sum a zero and two positive numbers', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: '0' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: '2' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: '3' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryByText('5')).toBeInTheDocument();
+    });
+    
 
-    const calculateButton = screen.getByText('Calculate');
-    fireEvent.click(calculateButton);
+- **c. Verify the sum of three large numbers:**
+  - Test Code:
+    
+    it('should sum three large numbers', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: '1000000' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: '2000000' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: '3000000' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryByText('6000000')).toBeInTheDocument();
+    });
+    
 
-    const sumDisplay = screen.getByText('Sum: 6');
-    expect(sumDisplay).toBeInTheDocument();
-  });
+**2. Negative Inputs:**
 
-  it('should handle invalid input', () => {
-    render(<index />);
-    const input1 = screen.getByLabelText('Number 1:');
-    const input2 = screen.getByLabelText('Number 2:');
-    const input3 = screen.getByLabelText('Number 3:');
-    fireEvent.change(input1, { target: { value: 'a' } });
-    fireEvent.change(input2, { target: { value: 'b' } });
-    fireEvent.change(input3, { target: { value: 'c' } });
+- **a. Verify the sum of three negative numbers:**
+  - Test Code:
+    
+    it('should sum three negative numbers', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: '-1' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: '-2' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: '-3' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryByText('-6')).toBeInTheDocument();
+    });
+    
 
-    const calculateButton = screen.getByText('Calculate');
-    fireEvent.click(calculateButton);
+- **b. Verify the sum of a negative number and two positive numbers:**
+  - Test Code:
+    
+    it('should sum a negative number and two positive numbers', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: '-1' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: '2' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: '3' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryByText('4')).toBeInTheDocument();
+    });
+    
 
-    const errorMessage = screen.getByText('Invalid input. Please enter numbers only.');
-    expect(errorMessage).toBeInTheDocument();
-  });
-});
+- **c. Verify the sum of three large negative numbers:**
+  - Test Code:
+    
+    it('should sum three large negative numbers', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: '-1000000' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: '-2000000' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: '-3000000' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryByText('-6000000')).toBeInTheDocument();
+    });
+    
+
+**3. Edge Cases:**
+
+- **a. Verify the sum of three zeros:**
+  - Test Code:
+    
+    it('should sum three zeros', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: '0' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: '0' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: '0' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryByText('0')).toBeInTheDocument();
+    });
+    
+
+- **b. Verify the sum of one positive and two negative numbers:**
+  - Test Code:
+    
+    it('should sum one positive and two negative numbers', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: '1' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: '-2' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: '-3' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryByText('-4')).toBeInTheDocument();
+    });
+    
+
+- **c. Verify the sum of two positive and one negative number:**
+  - Test Code:
+    
+    it('should sum two positive and one negative number', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: '2' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: '-3' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: '1' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryByText('0')).toBeInTheDocument();
+    });
+    
+
+**4. Invalid Inputs:**
+
+- **a. Verify an error is thrown for non-numeric inputs:**
+  - Test Code:
+    
+    it('should throw error for non-numeric inputs', () => {
+      const { result } = render(<index />);
+      fireEvent.change(screen.getByRole('input', { name: 'num1' }), { target: { value: 'a' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num2' }), { target: { value: 'b' } });
+      fireEvent.change(screen.getByRole('input', { name: 'num3' }), { target: { value: 'c' } });
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
+      expect(result.queryAllByText(/invalid/i)).toHaveLength(3);
+    });
+    
+
+- **b. Verify an error is thrown for undefined inputs:**
+  - Test Code:
+    
+    it('should throw error for undefined inputs', () => {
+      const { result } = render(<index />);
+      fireEvent.click(screen.getByRole('button', { name: 'sum-button' }));
